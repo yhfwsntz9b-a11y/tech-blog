@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>企业知识库搭建踩坑全记录：20 个灵魂拷问 — AI 技术笔记</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <button class="menu-btn" id="menu-btn">☰</button>
+    <a href="../index.html" class="logo">AI 技术笔记</a>
+    <nav class="header-nav">
+      <a href="../index.html">首页</a>
+      <a href="../daily/index.html">科技日报</a>
+      <a href="../guides/index.html" class="active">深度指南</a>
+      <a href="https://github.com/yhfwsntz9b-a11y" target="_blank">GitHub</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+  </div>
+</header>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-group">
+    <div class="sidebar-title">企业知识库 20 步</div>
+    <a href="#step0" class="sidebar-link">第〇步 · 需要 RAG 吗</a>
+    <a href="#step1" class="sidebar-link">第一步 · 全局架构</a>
+    <a href="#step2" class="sidebar-link">第二步 · PDF 解析</a>
+    <a href="#step3" class="sidebar-link">第三步 · 分块策略</a>
+    <a href="#step4" class="sidebar-link">第四步 · 元数据</a>
+    <a href="#step5" class="sidebar-link">第五步 · Embedding</a>
+    <a href="#step6" class="sidebar-link">第六步 · 向量数据库</a>
+    <a href="#step7" class="sidebar-link">第七步 · Query 预处理</a>
+    <a href="#step8" class="sidebar-link">第八步 · 混合检索</a>
+    <a href="#step9" class="sidebar-link">第九步 · Prompt 工程</a>
+    <a href="#step10" class="sidebar-link">第十步 · 缓存策略</a>
+    <a href="#step11" class="sidebar-link">第十一步 · 评估</a>
+    <a href="#step12" class="sidebar-link">第十二步 · 成本估算</a>
+    <a href="#step13" class="sidebar-link">第十三步 · 监控运维</a>
+    <a href="#step14" class="sidebar-link">第十四步 · 安全权限</a>
+    <a href="#step15" class="sidebar-link">第十五步 · 批量入库</a>
+    <a href="#step16" class="sidebar-link">第十六步 · 文档更新</a>
+    <a href="#step17" class="sidebar-link">第十七步 · 检索排查</a>
+    <a href="#step18" class="sidebar-link">第十八步 · 内容去重</a>
+    <a href="#step19" class="sidebar-link">第十九步 · API 降级</a>
+    <a href="#step20" class="sidebar-link">第二十步 · 灰度发布</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-title">返回</div>
+    <a href="../index.html" class="sidebar-link">← 返回首页</a>
+    <a href="index.html" class="sidebar-link">所有指南 →</a>
+  </div>
+</aside>
+
+<div class="layout">
+<main class="main">
+<div class="content">
+
+  <div class="article-header">
+    <div class="breadcrumb">
+      <a href="../index.html">首页</a> / <a href="index.html">深度指南</a> / 企业知识库
+    </div>
+    <h1>企业知识库搭建踩坑全记录：20 个灵魂拷问</h1>
+    <div class="article-meta">
+      <span>📅 2026-10-10</span>
+      <span>📖 约 20 分钟</span>
+      <span>🏷 RAG · 向量数据库 · Embedding</span>
+    </div>
+  </div>
+
+  <div class="prose">
+
+    <blockquote>做了两年企业 RAG 知识库，把每一步浓缩成一个问题和一句经验之谈。看完能少走半年弯路。</blockquote>
+
+    <h2 id="step0">第〇步：你的场景真的需要 RAG 吗？</h2>
+    <p>知识更新频繁、需要溯源、数据量大、不能给第三方 → 用 RAG。让模型学写作风格 → 用微调。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>很多人一上来就问"用 Milvus 还是 Qdrant"。错了，第一个问题永远是"需不需要 RAG"。选错方向，后面全白干。</p>
+    </div>
+
+    <h2 id="step1">第一步：先看全局架构，还是先写代码？</h2>
+    <p>先看全局。完整数据流：<strong>文档上传 → 解析 → 分块 → 向量化 → 入库 → 检索 → 生成</strong>。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>别一上来就搞微服务。单体 FastAPI + 向量数据库 + Redis，足够扛到 100 并发。等真正遇到瓶颈了再拆。</p>
+    </div>
+
+    <h2 id="step2">第二步：PDF 解析该走哪条路？</h2>
+    <p>干净 PDF → PyMuPDF（免费快速）。扫描件 → PaddleOCR（中文最好）。高价值文档 → 多模态大模型（0.01-0.05 元/页）。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>路线 1 先跑通，不行再上路线 2，只有合同财报才用路线 3。<strong>表格解析别自己写正则</strong>，直接用多模态模型识别成 Markdown。</p>
+    </div>
+
+    <h2 id="step3">第三步：分块用 512 tokens 够不够？</h2>
+    <p>不够。通用文档建议 <strong>800 tokens、overlap 100</strong>。太小缺上下文，太大检索不精确。FAQ 不切分，一个 QA 对一个 chunk。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>试试父子块检索——索引小块 200 tokens（精确匹配），返回大块 1000 tokens（完整上下文）。精度和回答质量同时提升。</p>
+    </div>
+
+    <h2 id="step4">第四步：元数据到底要不要认真填？</h2>
+    <p>必须。每个 chunk 带上 <strong>document_id、source、department、access_level、created_at</strong>。这是检索精度的隐形加速器。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>好的元数据能<strong>直接过滤 80% 无关文档</strong>，比优化向量还有效。用 pre-filter 不是 post-filter。access_level 必须从认证信息获取，不能从用户输入获取。</p>
+    </div>
+
+    <h2 id="step5">第五步：Embedding 模型选哪个？</h2>
+    <p>中文场景，<strong>BGE-M3 是版本答案</strong>。智源出品，开源免费，支持稠密+稀疏+多向量三种模式，最高 8192 token 输入。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>一张 T4 显卡就够跑，200 句/秒，零 API 成本。什么时候用 OpenAI？没 GPU、需要多语言统一向量空间、不在乎钱。</p>
+    </div>
+
+    <h2 id="step6">第六步：向量数据库选 Milvus 还是 Qdrant？</h2>
+    <p>中小规模（&lt;50 万）→ Qdrant，Rust 写的，单二进制部署。大规模（&gt;50 万）→ Milvus，性能天花板高。原型 → Chroma。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>向量数据库<strong>迁移成本极高</strong>。一开始就选能扛住未来 3 年数据量的方案，别等数据量上来了再换。不想运维就用 Pinecone / Zilliz Cloud。</p>
+    </div>
+
+    <h2 id="step7">第七步：用户问"年假怎么算"，怎么检索到"年休假计算规则"？</h2>
+    <p>做 Query 预处理：同义词扩展、HyDE（先假设回答再检索）、Multi-Query（3-5 个角度分别检索）、Step-Back（退一步抽象化）。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>不是每个问题都需要检索，"你好""谢谢"直接让 LLM 回。<strong>多轮对话必须把历史拼进当前 query 再改写</strong>，不然"那试用期呢"这种追问必挂。</p>
+    </div>
+
+    <h2 id="step8">第八步：只用向量检索行不行？</h2>
+    <p>不行。向量检索 = 语义相似度 ≠ 精确匹配。"2026 春节"会匹配到"2025 春节"。必须混合检索：向量 + BM25 + RRF 融合。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>混合检索比纯向量 +10~15%。再加 Rerank（bge-reranker-v2-m3）精排，<strong>从 78% 干到 94%</strong>。流程：召回 Top-50 → Rerank → Top-5 送 LLM。</p>
+    </div>
+
+    <h2 id="step9">第九步：Prompt 怎么写才不会让模型瞎编？</h2>
+    <p>四要素：有答案就回答+标注来源、没答案就说"未找到"、禁止编造、简洁不啰嗦。最多塞 5 个 chunk ≈ 4000 tokens。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>"不知道"比"瞎编"好一万倍。一个瞎编答案，用户对整个系统失去信任。用 SSE 做流式输出，体验提升巨大。</p>
+    </div>
+
+    <h2 id="step10">第十步：同样的问题一天被问 50 次，每次都走完整 RAG？</h2>
+    <p>做三级缓存。L1 精确匹配（Redis，&lt;1ms）→ L2 语义缓存（相似度 &gt;0.95，~50ms）→ L3 完整 RAG（2-5s）。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>上线语义缓存后，LLM 调用量减少 40%，平均响应从 3.2s 降到 1.1s。文档更新时按 document_id 清除关联缓存。</p>
+    </div>
+
+    <h2 id="step11">第十一步：上线了不评估行不行？</h2>
+    <p>不行，不评估就是盲跑。检索看 Recall / Precision / MRR，生成看 Faithfulness / Relevance / Completeness。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>手动评估（每周 20 个 case）+ 自动评估（每天全量，用 RAGAS）。至少 100 个 QA 对才有统计意义。冷启动从业务方收集，迭代从用户点踩的对话里挖。</p>
+    </div>
+
+    <h2 id="step12">第十二步：老板问"到底要花多少钱"，你怎么答？</h2>
+    <p>小规模 ~$100/月，中规模 ~$750/月，大规模 ~$4,500/月。大头是 LLM 推理和服务器。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>省钱五招：语义缓存砍 40% LLM 调用、简单问题用 mini 模型、Embedding/Rerank 本地跑、批量向量化、上下文压缩减少 token。</p>
+    </div>
+
+    <h2 id="step13">第十三步：上线之后怎么知道哪个环节出了问题？</h2>
+    <p>接 LangFuse（开源，Docker 一键部署）。每次查询的完整链路——Query 改写 → Embedding → 检索 → Rerank → LLM——每个环节耗时、输入输出全可追踪。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>不接 LangFuse 就是裸奔。告警三条线：检索延迟 P95 &gt; 2s、LLM 失败率 &gt; 1%、命中率 &lt; 80%。</p>
+    </div>
+
+    <h2 id="step14">第十四步：权限控制和防注入怎么做？</h2>
+    <p>每个 chunk 打权限标签，检索时 pre-filter。系统 prompt 和用户输入严格分离，用 Llama Guard 检测注入。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>权限模型看起来简单，做起来很复杂——有人看自己、有人看部门、有人看全公司。提前设计，别等上线再补。</p>
+    </div>
+
+    <hr>
+
+    <h2 id="step15">第十五步：10 万文档怎么高效入库？</h2>
+    <p>批量处理，不要一条条调 API。用多线程/多进程并发写入。Embedding 模型 batching（一次送 64-128 条）。向量数据库用 bulk upsert。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>先做增量导入（按文件修改时间判断），不要每次全量重建。入库时记录进度断点，中断了能从断点续传，不用从头来。</p>
+    </div>
+
+    <h2 id="step16">第十六步：文档更新了，旧 chunk 怎么办？</h2>
+    <p>每个 chunk 必须带 document_id 和 version。文档更新时：删旧 version 的所有 chunk → 写入新 version 的 chunk。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>别忘了同步清除语义缓存。很多人只更新了向量库，缓存里还是旧答案，用户问同样的问题拿到过期回答，排查半天找不到原因。</p>
+    </div>
+
+    <h2 id="step17">第十七步：检索结果不好，怎么排查？</h2>
+    <p>分三层排查：① Query 层——改写后的 query 对不对？② 检索层——Top-K 里有没有正确答案？排第几？③ 生成层——LLM 有没有忽略上下文？</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>80% 的"回答不对"问题出在检索层，不是生成层。先查检索结果有没有命中正确 chunk，再去看 prompt 和模型。别一上来就调 prompt。</p>
+    </div>
+
+    <h2 id="step18">第十八步：不同文档里有重复内容怎么办？</h2>
+    <p>入库前去重。用 chunk 内容的 hash 值判重，或者用 Embedding 相似度 &gt;0.98 判语义重复。重复内容会导致检索时多条命中同一个知识点，挤掉其他相关内容。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>去重不只是节省存储空间的问题，它直接影响检索精度。两份文档都写了"年假5天"，检索返回 Top-5 里有 3 条是重复的，等于有效上下文只剩 2 条。</p>
+    </div>
+
+    <h2 id="step19">第十九步：LLM API 限流或挂了怎么办？</h2>
+    <p>做降级策略：主模型（GPT-4o）超时/报错 → 自动切备用模型（Qwen-Max）→ 再挂 → 返回"系统繁忙请稍后"。用 tenacity 做重试，指数退避。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>一定要设超时（建议 30s），不然一个慢请求会卡住整个线程池。高峰期提前扩容或者切到更快的模型。记录每次降级事件，事后分析是否需要调整策略。</p>
+    </div>
+
+    <h2 id="step20">第二十步：新策略怎么安全上线？</h2>
+    <p>灰度发布。先 10% 流量走新策略，对比旧策略的命中率和满意度。没问题再扩到 50% → 100%。</p>
+    <div class="tip-box">
+      <div class="box-title">💡 经验之谈</div>
+      <p>别直接全量替换。准备一个开关（Redis 或配置文件），能秒级切回旧策略。每次只改一个变量——换了 Rerank 模型就別同时换 chunk 策略，不然出了问题你不知道是谁的锅。</p>
+    </div>
+
+    <hr>
+
+    <blockquote><strong>最后：先跑通，再优化。别追求完美的第一版，追求能快速迭代的架构。</strong></blockquote>
+
+  </div>
+
+  <!-- Article Navigation -->
+  <div class="article-nav">
+    <a href="index.html">
+      <div class="nav-label">← 返回</div>
+      <div class="nav-title">所有深度指南</div>
+    </a>
+    <a href="../daily/index.html" class="next">
+      <div class="nav-label">下一篇 →</div>
+      <div class="nav-title">科技日报合集</div>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>AI 技术笔记 · 基于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 托管</p>
+</footer>
+
+</main>
+</div>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>
