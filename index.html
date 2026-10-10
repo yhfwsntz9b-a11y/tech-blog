@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 技术笔记 — 科技日报 · 知识库指南 · 实战经验</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-left">
+    <button class="menu-btn" id="menu-btn">☰</button>
+    <a href="index.html" class="logo">AI 技术笔记</a>
+    <nav class="header-nav">
+      <a href="index.html" class="active">首页</a>
+      <a href="daily/index.html">科技日报</a>
+      <a href="guides/index.html">深度指南</a>
+      <a href="https://github.com/yhfwsntz9b-a11y" target="_blank">GitHub</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="搜索文章...">
+    </div>
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+  </div>
+</header>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progress-bar"></div>
+
+<!-- Sidebar -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-group">
+    <div class="sidebar-title">科技日报</div>
+    <a href="daily/2026-10-10.html" class="sidebar-link">2026-10-10 <span class="badge badge-new">NEW</span></a>
+    <a href="daily/2026-10-09.html" class="sidebar-link">2026-10-09</a>
+    <a href="daily/2026-10-08.html" class="sidebar-link">2026-10-08</a>
+    <a href="daily/2026-09-30.html" class="sidebar-link">2026-09-30</a>
+    <a href="daily/2026-09-29.html" class="sidebar-link">2026-09-29</a>
+    <a href="daily/index.html" class="sidebar-link">查看全部 →</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-title">深度指南</div>
+    <a href="guides/enterprise-kb.html" class="sidebar-link">企业知识库搭建 <span class="badge badge-hot">HOT</span></a>
+    <a href="guides/index.html" class="sidebar-link">更多指南 →</a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="layout">
+<main class="main">
+<div class="content">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-tag">🚀 持续更新中</div>
+    <h1>AI 技术实战笔记</h1>
+    <p>每日科技前沿速递 + 深度技术指南，从 RAG 知识库到 AI Agent，用实战经验替代纸上谈兵</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">30+</div>
+        <div class="stat-label">科技日报</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20</div>
+        <div class="stat-label">实战步骤</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">原创内容</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Latest Daily Reports -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(59,130,246,0.1);">📰</div>
+      <h2>最新科技日报</h2>
+      <a href="daily/index.html">查看全部 →</a>
+    </div>
+    <div class="card-grid">
+      <a href="daily/2026-10-10.html" class="card animate-in" data-search="2026-10-10 AI编程 Claude Codex 科技日报">
+        <div class="card-date">2026-10-10</div>
+        <div class="card-title">AI 编程新纪元：Claude Code + Codex 双雄争霸</div>
+        <div class="card-desc">Anthropic 发布 Claude Code 重大更新，OpenAI Codex 全面开放，AI 编程工具进入白热化竞争阶段</div>
+        <div class="card-tags">
+          <span class="card-tag">AI编程</span>
+          <span class="card-tag accent">Claude</span>
+        </div>
+      </a>
+      <a href="daily/2026-10-09.html" class="card animate-in" data-search="2026-10-09 AI Agent 多模态 科技日报">
+        <div class="card-date">2026-10-09</div>
+        <div class="card-title">AI Agent 进入企业级落地元年</div>
+        <div class="card-desc">多家企业发布 Agent 平台产品，从概念验证走向生产部署，多模态能力成为标配</div>
+        <div class="card-tags">
+          <span class="card-tag">Agent</span>
+          <span class="card-tag accent">企业级</span>
+        </div>
+      </a>
+      <a href="daily/2026-10-08.html" class="card animate-in" data-search="2026-10-08 大模型 开源 科技日报">
+        <div class="card-date">2026-10-08</div>
+        <div class="card-title">开源大模型性能追平闭源</div>
+        <div class="card-desc">Llama 4 和 Qwen-3 系列在多项基准测试中与 GPT-4o 持平，开源生态迎来里程碑</div>
+        <div class="card-tags">
+          <span class="card-tag">开源模型</span>
+          <span class="card-tag accent">LLM</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Deep Guides -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(139,92,246,0.1);">📚</div>
+      <h2>深度技术指南</h2>
+      <a href="guides/index.html">查看全部 →</a>
+    </div>
+    <div class="card-grid">
+      <a href="guides/enterprise-kb.html" class="card animate-in" data-search="企业知识库 RAG 向量数据库 Embedding 搭建">
+        <div class="card-date">深度指南 · 20 步</div>
+        <div class="card-title">企业知识库搭建踩坑全记录</div>
+        <div class="card-desc">从 Demo 到上线，每一步的坑都替你踩了。覆盖文档解析、分块策略、混合检索、Rerank、缓存、评估、安全全流程</div>
+        <div class="card-tags">
+          <span class="card-tag">RAG</span>
+          <span class="card-tag accent">向量数据库</span>
+          <span class="card-tag">Embedding</span>
+        </div>
+      </a>
+      <a href="#" class="card animate-in" data-search="AI Agent 架构 LangChain 实战">
+        <div class="card-date">即将更新</div>
+        <div class="card-title">AI Agent 架构选型完全指南</div>
+        <div class="card-desc">ReAct / Workflow / Multi-Agent / Supervisor 六种架构的取舍，附 LangChain 实战代码</div>
+        <div class="card-tags">
+          <span class="card-tag">Agent</span>
+          <span class="card-tag accent">LangChain</span>
+        </div>
+      </a>
+      <a href="#" class="card animate-in" data-search="Prompt Engineering 提示词工程 实战">
+        <div class="card-date">即将更新</div>
+        <div class="card-title">Prompt Engineering 实战手册</div>
+        <div class="card-desc">从 Few-shot 到 Chain-of-Thought，10 个真实业务场景的提示词优化案例</div>
+        <div class="card-tags">
+          <span class="card-tag">Prompt</span>
+          <span class="card-tag accent">实战</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tech Stack Section -->
+  <div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:rgba(16,185,129,0.1);">🛠</div>
+      <h2>技术栈覆盖</h2>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;">
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">RAG</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">AI Agent</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">LangChain</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">向量数据库</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">Embedding</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">LLM</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">Prompt Engineering</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">Milvus</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">Qdrant</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">BGE-M3</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">FastAPI</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">Claude</span>
+      <span class="card-tag" style="padding:6px 14px;font-size:13px;">GPT-4o</span>
+      <span class="card-tag accent" style="padding:6px 14px;font-size:13px;">开源模型</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <p>AI 技术笔记 · 基于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 托管</p>
+  <p style="margin-top:8px;">
+    <a href="https://github.com/yhfwsntz9b-a11y" target="_blank">GitHub</a> · 
+    <a href="https://www.zhihu.com" target="_blank">知乎</a>
+  </p>
+</footer>
+
+</main>
+</div>
+
+<script src="assets/main.js"></script>
+</body>
+</html>
