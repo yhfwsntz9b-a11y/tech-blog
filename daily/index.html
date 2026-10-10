@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>科技日报合集 — AI 技术笔记</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <button class="menu-btn" id="menu-btn">☰</button>
+    <a href="../index.html" class="logo">AI 技术笔记</a>
+    <nav class="header-nav">
+      <a href="../index.html">首页</a>
+      <a href="../daily/index.html" class="active">科技日报</a>
+      <a href="../guides/index.html">深度指南</a>
+      <a href="https://github.com/yhfwsntz9b-a11y" target="_blank">GitHub</a>
+    </nav>
+  </div>
+  <div class="header-right">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="搜索日报...">
+    </div>
+    <button class="theme-toggle" id="theme-toggle">🌙</button>
+  </div>
+</header>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-group">
+    <div class="sidebar-title">2026 年 10 月</div>
+    <a href="2026-10-10.html" class="sidebar-link">10-10 <span class="badge badge-new">NEW</span></a>
+    <a href="2026-10-09.html" class="sidebar-link">10-09</a>
+    <a href="2026-10-08.html" class="sidebar-link">10-08</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-title">2026 年 9 月</div>
+    <a href="2026-09-30.html" class="sidebar-link">09-30</a>
+    <a href="2026-09-29.html" class="sidebar-link">09-29</a>
+    <a href="2026-09-22.html" class="sidebar-link">09-22</a>
+    <a href="2026-09-21.html" class="sidebar-link">09-21</a>
+    <a href="2026-09-20.html" class="sidebar-link">09-20</a>
+  </div>
+  <div class="sidebar-group">
+    <div class="sidebar-title">返回</div>
+    <a href="../index.html" class="sidebar-link">← 返回首页</a>
+  </div>
+</aside>
+
+<div class="layout">
+<main class="main">
+<div class="content">
+
+  <div class="hero" style="padding:40px 0 20px;">
+    <div class="hero-tag">📰 科技日报</div>
+    <h1>每日 AI 前沿速递</h1>
+    <p>每天 5 分钟，掌握 AI 领域最新动态。HN Top10 + GitHub Trending + 行业深度</p>
+  </div>
+
+  <div class="card-grid" id="daily-cards">
+    <a href="2026-10-10.html" class="card animate-in" data-search="2026-10-10 AI编程 Claude Codex Anthropic OpenAI">
+      <div class="card-date">2026-10-10 · 周五</div>
+      <div class="card-title">AI 编程新纪元：Claude Code + Codex 双雄争霸</div>
+      <div class="card-desc">Anthropic 发布 Claude Code 重大更新，OpenAI Codex 全面开放，AI 编程工具进入白热化竞争阶段</div>
+      <div class="card-tags">
+        <span class="card-tag">AI编程</span>
+        <span class="card-tag accent">Claude</span>
+      </div>
+    </a>
+    <a href="2026-10-09.html" class="card animate-in" data-search="2026-10-09 AI Agent 企业级 多模态">
+      <div class="card-date">2026-10-09 · 周四</div>
+      <div class="card-title">AI Agent 进入企业级落地元年</div>
+      <div class="card-desc">多家企业发布 Agent 平台产品，从概念验证走向生产部署</div>
+      <div class="card-tags">
+        <span class="card-tag">Agent</span>
+        <span class="card-tag accent">企业级</span>
+      </div>
+    </a>
+    <a href="2026-10-08.html" class="card animate-in" data-search="2026-10-08 开源大模型 Llama Qwen GPT-4o">
+      <div class="card-date">2026-10-08 · 周三</div>
+      <div class="card-title">开源大模型性能追平闭源</div>
+      <div class="card-desc">Llama 4 和 Qwen-3 系列在多项基准测试中与 GPT-4o 持平</div>
+      <div class="card-tags">
+        <span class="card-tag">开源模型</span>
+        <span class="card-tag accent">LLM</span>
+      </div>
+    </a>
+    <a href="2026-09-30.html" class="card animate-in" data-search="2026-09-30 科技日报">
+      <div class="card-date">2026-09-30 · 周二</div>
+      <div class="card-title">9 月收官：AI 基础设施大升级</div>
+      <div class="card-desc">云端推理成本持续下降，边缘 AI 芯片出货量创新高</div>
+      <div class="card-tags">
+        <span class="card-tag">基础设施</span>
+        <span class="card-tag accent">芯片</span>
+      </div>
+    </a>
+    <a href="2026-09-29.html" class="card animate-in" data-search="2026-09-29 科技日报">
+      <div class="card-date">2026-09-29 · 周一</div>
+      <div class="card-title">多模态搜索成为新战场</div>
+      <div class="card-desc">Google、Bing、百度同周发布图文混合搜索功能</div>
+      <div class="card-tags">
+        <span class="card-tag">搜索</span>
+        <span class="card-tag accent">多模态</span>
+      </div>
+    </a>
+    <a href="2026-09-22.html" class="card animate-in" data-search="2026-09-22 科技日报">
+      <div class="card-date">2026-09-22 · 周一</div>
+      <div class="card-title">RAG 技术进入 2.0 时代</div>
+      <div class="card-desc">GraphRAG、Agentic RAG 等新范式开始在企业场景落地</div>
+      <div class="card-tags">
+        <span class="card-tag">RAG</span>
+        <span class="card-tag accent">GraphRAG</span>
+      </div>
+    </a>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <p>AI 技术笔记 · 基于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 托管</p>
+</footer>
+
+</main>
+</div>
+
+<script src="../assets/main.js"></script>
+</body>
+</html>
